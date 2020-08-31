@@ -8,8 +8,7 @@ import data from './../../assets/data.json';
 
 export default function configureStore(initialState) {
     const persistedState = loadState();
-    const composeEnhancers =
-        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
 
     const store = createStore(
         rootReducer,
