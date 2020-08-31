@@ -14,11 +14,12 @@ const Register = (props) => {
         console.log("values ")
 
         const user = {
-            id: 1,
+            id: props.auth.getCurrentLength() + 1,
             name: name,
             email: email,
             password: password
         }
+        console.log('New user- >', user)
         props.auth.signup(user);
         props.history.push('/', null);
     }

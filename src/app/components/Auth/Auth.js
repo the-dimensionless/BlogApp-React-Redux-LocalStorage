@@ -38,7 +38,7 @@ export default class Auth {
 
     logout = () => {
         localStorage.removeItem('currentUser');
-        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('isLoggedIn', 'false');
     }
 
     isAuthenticated = () => {
@@ -59,6 +59,17 @@ export default class Auth {
 
         console.log("new user list -> ", list);
         return;
+    }
+
+    getCurrentLength = () => {
+        let listOfUsers = localStorage.getItem('listOfUsers');
+        let list = (listOfUsers) ? JSON.parse(listOfUsers) : [];
+
+        if (list) {
+            return list.length
+        } else {
+            return 0
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import Home from './app/components/Home';
 import Create from './app/components/Create';
 import Register from './app/components/Register';
 import ViewDetails from './app/components/ViewDetails';
+import Logout from './app/components/Logout';
 
 import Auth from './app/components/Auth/Auth';
 import Nav from './app/components/Nav';
@@ -36,6 +37,13 @@ class App extends Component {
           <Route path="/viewDetails" render={props =>
             this.auth.isAuthenticated() ? (
               <ViewDetails auth={this.auth} {...props} />
+            ) : <Redirect to="/" />
+          }
+          />
+
+          <Route path="/logout" render={props =>
+            this.auth.isAuthenticated() ? (
+              <Logout auth={this.auth} {...props} />
             ) : <Redirect to="/" />
           }
           />

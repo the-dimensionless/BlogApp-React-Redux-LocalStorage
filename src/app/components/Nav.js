@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Login from './Login';
 
 const Nav = ({ auth }) => {
 
@@ -11,11 +10,20 @@ const Nav = ({ auth }) => {
             <nav className="navbar navbar-light" style={styles.navStyle}>
                 <ul className="nav nav-pills nav-fill">
                     <li className="nav-item">
-                        <Link to='/' className="nav-link" style={styles.customeColor}> Login </Link>
+
                     </li>
-                    <li className="nav-item">
-                        <Link to='/profile' className="nav-link" style={styles.customeColor}>Register</Link>
-                    </li>
+                    {!auth.isAuthenticated() && (
+                        <li className="nav-item">
+                            <Link to='/' className="nav-link" style={styles.customeColor}> Login </Link>
+                        </li>
+                    )}
+
+                    {!auth.isAuthenticated() && (
+                        <li className="nav-item">
+                            <Link to='/register' className="nav-link" style={styles.customeColor}>Register</Link>
+                        </li>
+                    )}
+
                     {auth.isAuthenticated() && (
                         <li className="nav-item">
                             <Link to='/home' className="nav-link" style={styles.customeColor}>Home</Link>
@@ -27,11 +35,11 @@ const Nav = ({ auth }) => {
                         </li>
                     )}
 
-                    <li className="nav-item">
-                        <button onClick={() => auth.isAuthenticated() ? '/home' : Login} >
-                            {auth.isAuthenticated() ? "Log Out" : "Log In"}
-                        </button>
-                    </li>
+                    {auth.isAuthenticated() && (
+                        <li className="nav-item">
+                            <Link to='/logout' className="nav-link" style={styles.customeColor}>Logout</Link>
+                        </li>
+                    )}
                 </ul>
             </nav>
         </div>

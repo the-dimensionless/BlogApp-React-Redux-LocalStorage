@@ -1,81 +1,96 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createPost } from '../redux/actions/postActions';
 
 const Create = (props) => {
+
+    // eslint-disable-next-line
+    let [postId, setPostId] = useState(Math.max.apply(Math, props.posts.map(function (o) { return o["id"]; })) + 1);
+    let [postTitle, setPostTitle] = useState('');
+    let [postSlug, setPostSlug] = useState('');
+    let [postBody, setPostBody] = useState('');
+
+    let authorId = props.auth.getUserDetails().id;
+
+    function submitForm() {
+        const post = {
+            id: postId,
+            title: postTitle,
+            slug: postSlug,
+            body: postBody,
+            date: new Date().toDateString(),
+            authorId: authorId,
+            likes: []
+        }
+
+        props.createPost(post);
+        //console.log('Sent for creation', post);
+        props.history.push('/home');
+    }
+
     return (
-        <div style={styles.container}>
-            <div style={styles.addPostForm}>
-                <h3 style={styles.header}>Create New Post</h3>
+        <div className="container" style={styles.container}>
+            <div className="card">
+                <h5 className="card-header">Featured</h5>
+                <div className="card-body">
+                    <input name="title" placeholder="Enter title" className="card-title"
+                        value={postTitle} className="form-control"
+                        onChange={e => setPostTitle(e.target.value)}
+                    /><br />
+                    <p className="card-text">
+                        <input name="slug" placeholder="Enter Slug" className="card-text" className="form-control"
+                            value={postSlug}
+                            onChange={e => setPostSlug(e.target.value)}
+                        />
+                    </p>
 
-                <input style={styles.textInput} placeholder="Enter Title" onChangeText={(text) => setPostTitle(text)}
-                />
+                </div>
 
-                <input style={styles.textInput} placeholder="Enter Slug" onChangeText={(text) => setPostSlug(text)}
-                />
+                <div className="card-body">
+                    <p className="card-title">
+                        <textarea rows="4" cols="50" name="body" placeholder="Enter Body" className="card-text" className="form-control"
+                            value={postBody} onChange={e => setPostBody(e.target.value)}
+                        >
 
-                <input style={styles.textBody} placeholder="Enter Body" onChangeText={(text) => setPostBody(text)}
-                />
-
-                <button style={styles.button} onPress={() => submitForm()}>
-                    <p style={styles.buttonText}>Create</p>
-                </button>
+                        </textarea>
+                    </p>
+                    <p className="card-text">{new Date().toDateString()}</p>
+                </div>
             </div>
+
+            <div style={styles.buttonContainer}>
+                <div style={styles.buttonGroup}>
+                    <button className="btn btn-primary" style={styles.button}
+                        onClick={() => submitForm()}
+                    >Create</button>
+
+                </div>
+            </div>
+
         </div>
     );
 };
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: '#36485f',
-        paddingLeft: 60,
-        paddingRight: 60,
-    },
-    addPostForm: {
-        alignSelf: 'stretch',
+        padding: '4%',
 
+        alignSelf: 'center'
     },
-    header: {
-        fontSize: 24,
-        color: '#fff',
-        paddingBottom: 10,
-        marginBottom: 40,
-        borderBottomColor: '#199187',
-        borderBottomWidth: 1,
+    buttonContainer: {
+        padding: 5,
+        flex: 1,
+        flexDirection: "row"
     },
-    textInput: {
-        alignSelf: 'stretch',
-        height: 40,
-        marginBottom: 30,
-        color: '#fff',
-        borderBottomColor: '#f8f8f8',
-        borderBottomWidth: 1
-    },
-    textBody: {
-        alignSelf: 'stretch',
-        height: 80,
-        marginBottom: 30,
-        color: '#fff',
-        borderBottomColor: '#f8f8f8',
-        borderBottomWidth: 1,
-        borderColor: '#f8f8f8'
+    buttonGroup: {
+        width: '100%',
+        padding: 2,
     },
     button: {
-        alignSelf: 'stretch',
-        alignItems: 'center',
-        padding: 20,
-        backgroundColor: '#59cbbd',
-        marginTop: 30
-    },
-    buttonText: {
-        color: '#fff',
-        fontWeight: 'bold'
+        width: '100%',
 
     }
-});
-
+}
 function mapStateToProps(state) {
     return {
         posts: state.postReducer.posts,

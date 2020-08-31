@@ -4,13 +4,9 @@ import { likePost, editPost, deletePost } from '../redux/actions/postActions';
 
 let post = {}
 const ViewDetails = props => {
-    console.log('Props are ', props);
+    //console.log('Props are ', props);
     post = props.location.state.post
-    console.log(post.title)
-
     let currentUser = props.auth.getUserDetails();
-    console.log('User is ', currentUser)
-
     const handleDeletion = () => {
         props.deletePost(post.id);
         props.history.push('/home');
@@ -36,15 +32,21 @@ const ViewDetails = props => {
             </div>
             <button className="btn btn-block btn-primary"><i className="fa fa-thumbs-up">Like</i> </button>
 
-            <div style={styles.buttonContainer}>
-                <div style={styles.buttonGroup}>
-                    <button className="btn btn-secondary" style={styles.button}>Edit</button>
 
-                    <button className="btn btn-danger" style={styles.button}
-                        onClick={() => handleDeletion()}
-                    >Delete</button>
+            {(currentUser.id === post.authorId) ?
+                <div style={styles.buttonContainer}>
+                    <div style={styles.buttonGroup}>
+                        <button className="btn btn-secondary" style={styles.button}>Edit</button>
+
+                        <button className="btn btn-danger" style={styles.button}
+                            onClick={() => handleDeletion()}
+                        >Delete</button>
+                    </div>
                 </div>
-            </div>
+                :
+                <div>
+                </div>
+            }
 
         </div>
     );

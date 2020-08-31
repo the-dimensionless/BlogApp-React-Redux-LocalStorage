@@ -6,10 +6,6 @@ import { loadPosts, editPost, deletePost } from '../redux/actions/postActions';
 import { connect } from 'react-redux';
 
 const PostsList = (props) => {
-    useEffect(() => {
-        console.log(props);
-    }, []);// eslint-disable-line react-hooks/exhaustive-deps
-
     const posts = props.posts.map(post => {
         return <Post post={post} history={props.history} key={post.id} />
     })

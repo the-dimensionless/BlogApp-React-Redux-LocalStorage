@@ -77,6 +77,7 @@ function Login(props) {
                             </small>
                         </div>
                     </div>
+                    <br></br>
                     <div className="container">
                         <input type="submit" className="btn btn-primary" />
                     </div>
