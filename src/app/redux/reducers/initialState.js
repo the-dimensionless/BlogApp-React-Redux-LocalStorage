@@ -3,3 +3,5 @@ export default {
     "posts": data,
     // alternatively require('../../assets/data/data.json')
 }
+
+

@@ -6,7 +6,6 @@ export function loadPosts() {
     return dispatch => {
         return dispatch({
             type: types.LIST_POSTS,
-            posts: data
         });
     }
 };
@@ -35,12 +34,19 @@ export function editPost(post) {
 export function deletePost(postId) {
     return dispatch => {
         // Mock API Calls/perist changes
+        persistDelete(postId)
         return dispatch({
             type: types.DELETE_POST,
             payload: postId
         });
     }
 };
+
+function persistDelete(postId) {
+    data.filter((p) => {
+        return p["id"] !== postId
+    })
+}
 
 export function likePost(postId, likes) {
     return dispatch => {
