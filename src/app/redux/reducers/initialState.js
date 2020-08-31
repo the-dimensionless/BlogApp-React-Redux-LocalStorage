@@ -1,5 +1,5 @@
-//import { helpLoadData } from '../../components/Util';
+import data from '../../../assets/data.json';
 export default {
-    "posts": []
+    "posts": data,
     // alternatively require('../../assets/data/data.json')
 }

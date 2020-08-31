@@ -1,11 +1,12 @@
 import * as types from './actionTypes';
+import data from '../../../assets/data.json';
 
 export function loadPosts() {
     console.log('called');
     return dispatch => {
         return dispatch({
             type: types.LIST_POSTS,
-            posts: posts
+            posts: data
         });
     }
 };

@@ -1,39 +1,49 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import Login from './Login';
 
-class Nav extends Component {
-    render() {
-        const { isAuthenticated, login, logout } = this.props.auth;
-        return (
-            <div>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to='/'> Login </Link>
-                        </li>
-                        <li>
-                            <Link to='/profile'>Register</Link>
-                        </li>
-                        {isAuthenticated() && (
-                            <li>
-                                <Link to='/home'>Home</Link>
-                            </li>
-                        )}
-                        {isAuthenticated() && (
-                            <li>
-                                <Link to='/create'>Create</Link>
-                            </li>
-                        )}
+const Nav = ({ auth }) => {
 
-                        <li>
-                            <button onClick={isAuthenticated() ? logout : login} >
-                                {isAuthenticated() ? "Log Out" : "Log In"}
-                            </button>
+    console.log(auth)
+
+    return (
+        <div className="sticky-top">
+            <nav className="navbar navbar-light" style={styles.navStyle}>
+                <ul className="nav nav-pills nav-fill">
+                    <li className="nav-item">
+                        <Link to='/' className="nav-link" style={styles.customeColor}> Login </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to='/profile' className="nav-link" style={styles.customeColor}>Register</Link>
+                    </li>
+                    {auth.isAuthenticated() && (
+                        <li className="nav-item">
+                            <Link to='/home' className="nav-link" style={styles.customeColor}>Home</Link>
                         </li>
-                    </ul>
-                </nav>
-            </div>
-        );
+                    )}
+                    {auth.isAuthenticated() && (
+                        <li className="nav-item">
+                            <Link to='/create' className="nav-link" style={styles.customeColor}>Create</Link>
+                        </li>
+                    )}
+
+                    <li className="nav-item">
+                        <button onClick={() => auth.isAuthenticated() ? '/home' : Login} >
+                            {auth.isAuthenticated() ? "Log Out" : "Log In"}
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    );
+};
+
+const styles = {
+    navStyle: {
+        backgroundColor: '#41B3A3',
+    },
+    customeColor: {
+        color: 'white'
     }
 }
 

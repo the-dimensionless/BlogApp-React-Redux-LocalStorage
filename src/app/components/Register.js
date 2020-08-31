@@ -30,7 +30,7 @@ const Register = (props) => {
             <div style={styles.baseContainer} ref={containerRef}>
                 <div className="content">
                     <div style={styles.imageContainer}>
-                        <img style={styles.img} src={loginImg} />
+                        <img style={styles.img} src={loginImg} alt="student on computer" />
                     </div>
                     <div className="container">
                         <form>
