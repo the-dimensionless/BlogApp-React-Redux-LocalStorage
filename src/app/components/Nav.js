@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Nav = ({ auth }) => {
 
-    console.log(auth)
+    //console.log(auth)
 
     return (
         <div className="sticky-top">

@@ -9,7 +9,7 @@ function Login(props) {
     const { register, handleSubmit, errors } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
+        //console.log(data);
         let res = props.auth.login(data)
         switch (res) {
             case "signup":
@@ -77,20 +77,35 @@ function Login(props) {
                             </small>
                         </div>
                     </div>
-                    <br></br>
-                    <div className="container">
-                        <input type="submit" className="btn btn-primary" />
+                    <br></br> <br />
+                    <div className="container" style={styles.btn}>
+                        <div className="container" >
+                            <input type="submit" className="btn btn-primary" />
+                        </div>
+                        <br>
+                        </br>
                     </div>
                 </form>
-                <br>
-                </br>
-                <div>
-                    <Link to='/register' className="btn btn-danger">Don't have an account? Register now!!!</Link>
 
-                </div>
+                <p style={styles.btn2}>
+                    <Link to='/register' className="btn btn-danger">Don't have an account? Register now!!!</Link>
+                </p>
+
+
             </div>
         </div>
     );
+}
+
+const styles = {
+    btn: {
+        alignSelf: 'center',
+        paddingLeft: 350
+    },
+    btn2: {
+        alignSelf: 'center',
+        paddingLeft: 270
+    }
 }
 
 export default Login;

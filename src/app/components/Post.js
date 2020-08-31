@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const Post = ({ post, history }) => {
-    console.log(history);
+    //console.log(history);
     return (
         <div style={styles.card}>
 

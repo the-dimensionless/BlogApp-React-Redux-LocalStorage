@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { likePost, editPost, deletePost } from '../redux/actions/postActions';
-import { unstable_batchedUpdates } from 'react-dom';
 
 let post = {}
 const ViewDetails = props => {
@@ -20,7 +19,19 @@ const ViewDetails = props => {
     const [likelist, setLikeList] = useState(local.likes);
 
     const updateForm = () => {
+        let p = {
+            id: local.id,
+            title: postTitle,
+            slug: postSlug,
+            body: postBody,
+            date: new Date().toDateString(),
+            authorId: local.authorId,
+            likes: likelist
+        }
 
+        props.editPost(p);
+        // console.log('Sent for updation');
+        props.history.push('/home');
     }
 
     const deletion = () => {
@@ -93,7 +104,7 @@ const ViewDetails = props => {
                     >Like {likes}</button>
                 </div>
                 <br />
-                <div style={styles.buttonContainer}>
+                <div style={styles.buttonContainer} hidden={!canEdit}>
                     <div style={styles.buttonGroup}>
                         <button className="btn btn-primary" style={styles.button}
                             onClick={() => updateForm()}

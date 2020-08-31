@@ -1,8 +1,14 @@
+import data from './../../assets/data.json';
+
 export const loadState = () => {
     try {
         const serializedState = localStorage.getItem('state');
         if (serializedState === null) {
-            return undefined;
+            console.log('serialized state is null so saving it')
+            saveState({
+                "posts": data
+            })
+            return data;
         }
         return JSON.parse(serializedState);
     } catch (err) {
